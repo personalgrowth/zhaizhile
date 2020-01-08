@@ -7,87 +7,90 @@ Page({
    * 页面的初始数据
    */
   data: {
-      /*
-        表单字段-start
-      */
-      name: '',
-      mobile: '',
-      address: '',
-      dateTime: '',
-      details: '',
-      uploadImg: '',
-      price: '',
-      /*
-        表单字段-end
-      */
-
-      isAgree: false
+    files: []
   },
-
-  //动态将input中的值给到data对应的变量中
-  inputedit: function (e) {
-    let _that = this;
-    //data-开头的自定义属性，可以通过dataset获取到，dataset是一个json对象
-    let dataset = e.currentTarget.dataset;
-    let name = dataset.name;
-    let value = e.detail.value;
-    _that.setData({
-      [name]: value
-    });
-  },
-
-  //有效时间选择
-  binddatechange: function (e) {
-    this.setData({
-      dateTime: e.detail.value
-    })
-  },
-
-  //上传图片
-  chooseImage: function (e) {
-    let _that = this;
-
-    wx.chooseImage({ success (res) {
-        const tempFilePaths = res.tempFilePaths
-        _that.setData({
-          uploadImg: tempFilePaths[0]
+  previewImage: function (e) {
+    let oldindex = e.currentTarget.id;
+    let that = this;
+    wx.chooseImage({
+      success: function (res) {
+        let files = that.data.files
+        files[oldindex] = res.tempFilePaths[0]
+        that.setData({
+          files: files
         })
-
-        //这是直接上传到后台-服务器
-        // wx.uploadFile({
-        //   url: 'http://web.bxapi.sxbdjw.com/fastdfs/fastdfs/upload', //仅为示例，非真实的接口地址
-        //   filePath: tempFilePaths[0],
-        //   name: 'file',
-        //   success (res){
-        //     const data = res.data
-        //     //do something
-        //   }
-        // })
+      }, fail: e => {
+        console.error(e)
       }
     })
   },
+  chooseImage: function () {
+    let that = this;
+    wx.chooseImage({
+      success: function (res) {
+        let files = that.data.files;
 
-  bindAgreeChange: function () {
-    this.setData({
-      isAgree: true
+        files = files.concat(res.tempFilePaths);
+        that.setData({
+          files: files
+        })
+      }, fail: e => {
+        console.error(e)
+      }
     })
   },
-
-  //发布订单
-  gotopage2: function () {
-    var formData = {
-      name: this.data.name,
-      mobile: this.data.mobile,
-      address: this.data.address,
-      dateTime: this.data.dateTime,
-      details: this.data.details,
-      uploadImg: this.data.uploadImg,
-      price: this.data.price,
-    }
-
-    //在这插库，成功后跳转至订单发布成功页
-
-    
+  gotopage2: function (e) {
+    /*云请求开发 */
+    let that = this;
+    wx.showLoading({
+      title: '上传中...',
+    })
+    let files = that.data.files;
+    let filesid = [];
+    Promise.all(files.map((item) => {
+      return wx.cloud.uploadFile({
+        cloudPath: 'my-image' + Date.now() + item.match(/\.[^.]+?$/)[0],
+        filePath: item,
+      })
+    }))
+      .then((resCloud) => {
+        wx.hideLoading();
+        filesid = resCloud.map((item) => {
+          return item.fileID
+        })
+        const db = wx.cloud.database()
+        db.collection('order').add({
+          data: {
+            name: e.detail.value.name,
+            tel: e.detail.value.tel,
+            money: e.detail.value.money,
+            content: e.detail.value.content,
+            cantime: that.data.data,
+            address: e.detail.value.address,
+            imgs: filesid.join(",")
+          },
+          success: res => {
+            // 在返回结果中会包含新创建的记录的 _id
+            this.setData({
+              counterId: res._id,
+              count: 1
+            })
+            wx.showToast({
+              title: '新增记录成功',
+            })
+            console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
+          },
+          fail: err => {
+            wx.showToast({
+              icon: 'none',
+              title: '新增记录失败'
+            })
+            console.error('[数据库] [新增记录] 失败：', err)
+          }
+        })
+      }).catch((err) => {
+        console.log(err)
+      })
     wx.showModal({
       title: '成功',
       content: '订单发布成功,请等待接单',
