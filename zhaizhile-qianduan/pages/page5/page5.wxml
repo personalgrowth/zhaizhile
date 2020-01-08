@@ -1,0 +1,18 @@
+<!--pages/page5/page5.wxml-->
+<view class="page" style="background-color:white;height: 100%;">
+<navigator class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+
+<view class="weui-cell__hd">
+<image src="/image/success.png" mode="aspectFill"></image>
+</view>
+ </navigator>
+
+  <view class="weui-cells__title">已经拨打了下单人手机号并取得联系，完成！</view>
+    <view class="weui-btn-area">
+     <button class="weui-btn" type="primary" bindtap='gotoindex'>确认送达</button>
+    </view>
+
+    <view class="weui-btn-area">
+     <button class="weui-btn" type="primary" bindtap='gotopage3'>再接一单</button>
+    </view>
+</view>

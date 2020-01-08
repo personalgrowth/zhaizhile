@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/page1/page1",
+    "pages/page2/page2",
+    "pages/page3/page3",
+    "pages/page4/page4",
+    "pages/page5/page5"
+  ],
+  "window": {
+    "enablePullDownRefresh": false,
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#FDA621",
+    "backgroundColor": "#ffffff",
+    "navigationBarTitleText": "宅知乐",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "selectedColor": "#FFD500",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "image/mine_un.png",
+        "selectedIconPath": "image/mine_in.png",
+        "text": "主页"
+      },
+      {
+        "pagePath": "pages/page1/page1",
+        "iconPath": "image/edit_un.png",
+        "selectedIconPath": "image/edit_in.png",
+        "text": "发布订单"
+      },
+      {
+        "pagePath": "pages/page3/page3",
+        "iconPath": "image/index_un.png",
+        "selectedIconPath": "image/index_in.png",
+        "text": "订单大厅"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

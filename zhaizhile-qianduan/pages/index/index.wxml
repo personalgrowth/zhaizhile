@@ -1,0 +1,10 @@
+<!--index.wxml-->
+
+<view class="page" style="background-color:white;height:100%;">
+
+<view class='imagesize'>
+  <image src="/image/logo.jpg" class='in-image'>
+  </image>
+</view>
+
+</view>

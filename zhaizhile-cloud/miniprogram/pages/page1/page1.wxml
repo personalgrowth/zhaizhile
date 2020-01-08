@@ -1,0 +1,109 @@
+<!--pages/page1/page1.wxml-->
+<!-- <import src="../../components/xnumber/xnumber.wxml"  /> -->
+<view class="page">
+  <view class="weui-cells weui-cells_after-title">
+ <navigator class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <view class="weui-cell__hd">
+    <image src="../../image/edit_in.png" style="text-align:center;margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+   </view>
+   <view class="weui-cell__bd">查看已发布订单</view>
+   </navigator>
+  </view>
+        
+<!-- 外卖信息 -->
+  <view class="weui-cells__title">外卖信息</view>
+  <view class="weui-cells weui-cells_after-title">
+
+    <navigator class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+
+      <view class="weui-cell__bd">姓名</view>
+       <view class="weui-cell__ft">
+      <input class="weui-input" type="digit" placeholder="请输入" bindinput="inputedit" data-name="name" value='{{name}}'/>
+       </view>
+    </navigator>
+
+    <navigator class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+
+      <view class="weui-cell__bd">手机号</view>
+       <view class="weui-cell__ft">
+      <input class="weui-input" type="digit" placeholder="请输入" bindinput="inputedit" data-name="mobile" value='{{mobile}}'/>
+       </view>
+    </navigator>
+
+    <navigator  class="weui-cell" hover-class="weui-cell_active">
+
+      <view class="weui-cell__bd">宿舍地址</view>
+       <view class="weui-cell__ft">
+      <input class="weui-input" type="digit" placeholder="请输入" bindinput="inputedit" data-name="address" value='{{address}}'/>
+       </view>
+    </navigator>
+
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__bd cell-title">有效时间</view>
+      <view class="weui-cell__ft">
+        <picker mode="date" value="{{dateTime}}" start="{{startDate}}" bindchange="binddatechange">
+          <view class="weui-input">{{dateTime||'到时间自动删除'}}</view>
+        </picker>
+      </view>
+    </view>
+  </view>
+  <view class="weui-cells__tips">超过时间自动删除此发布</view>
+
+ <!-- 描述及图片 -->
+  <view class="weui-cells__title"></view>
+  <view class="weui-cells">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <view class="weui-uploader">
+          <view class="weui-uploader__hd">
+            <view class="section">
+              <textarea bindblur="getInfoText" auto-height placeholder="请输入您的外卖详情" style="min-height: 150rpx;" bindinput="inputedit" data-name="details" value='{{details}}'/>
+            </view>
+          </view>
+          <view class="weui-uploader__bd">
+            <view class="weui-uploader__files" id="uploaderFiles">
+              <block wx:for="{{files}}" wx:key="*this">
+                <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                  <image class="weui-uploader__img" src="{{item}}" mode="aspectFill"  />
+                </view>
+              </block>
+            </view>
+            <view class="weui-uploader__input-box">
+              <view class="weui-uploader__input" bindtap="chooseImage"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 结算 -->
+  <view class="weui-cells__title">结算</view>
+  <view class="weui-cells weui-cells_after-title">
+    <!-- 定价 -->
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">订单价格</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" type="digit" placeholder="您愿支付多少钱" bindinput="inputedit" data-name="price" value='{{price}}'/>
+      </view>
+      <view class="weui-cell__ft">¥</view>
+    </view>
+  </view>
+  <view class="weui-cells__tips">必须大于1.0元</view>
+  <checkbox-group bindchange="bindAgreeChange">
+    <label class="weui-agree" for="weuiAgree">
+      <view class="weui-agree__text">
+        <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{isAgree}}"  />
+        <view class="weui-agree__checkbox-icon">
+          <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9" wx:if="{{isAgree}}"></icon>
+        </view>
+        我已阅读并同意平台服务条款
+      </view>
+      </label>
+    </checkbox-group>
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap='gotopage2'>确认发布</button>
+    </view>
+  </view>
