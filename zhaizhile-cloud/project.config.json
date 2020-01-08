@@ -39,41 +39,52 @@
 			"currentL": -1,
 			"list": []
 		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
 		"miniprogram": {
 			"current": 4,
 			"list": [
 				{
-					"id": -1,
-					"name": "01",
-					"pathName": "pages/page1/page1",
+					"id": 0,
+					"name": "pages/publishOrder/page1",
+					"pathName": "pages/publishOrder/page1",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "02",
-					"pathName": "pages/page2/page2",
+					"id": 1,
+					"name": "pages/taskOrder/page2",
+					"pathName": "pages/taskOrder/page2",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "03",
-					"pathName": "pages/page3/page3",
+					"id": 2,
+					"name": "pages/orderList/page3",
+					"pathName": "pages/orderList/page3",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": 3,
-					"name": "04",
-					"pathName": "pages/page4/page4",
+					"name": "pages/sendOrder/page4",
+					"pathName": "pages/sendOrder/page4",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "pages/orderMobile/page5",
+					"pathName": "pages/orderMobile/page5",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "05",
-					"pathName": "pages/page5/page5",
+					"name": "index",
+					"pathName": "pages/index/index",
 					"query": "",
 					"scene": null
 				}

@@ -7,7 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    files: []
+    files: [],
+
+    isAgree: false
   },
   previewImage: function (e) {
     let oldindex = e.currentTarget.id;
@@ -37,6 +39,11 @@ Page({
       }, fail: e => {
         console.error(e)
       }
+    })
+  },
+  bindAgreeChange: function() {
+    this.setData({
+      isAgree: true
     })
   },
   gotopage2: function (e) {

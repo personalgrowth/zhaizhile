@@ -50,7 +50,7 @@ Page({
   //下单
   placeOrder: function() {
     wx.switchTab({
-      url: '../page1/page1'
+      url: '../publishOrder/page1'
     })
   }
 

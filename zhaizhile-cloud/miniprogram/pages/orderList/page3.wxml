@@ -1,0 +1,11 @@
+<!--pages/page3/page3.wxml-->
+<view class="page">
+  <view class="weui-cells weui-cells_after-title" wx:for="{{list}}" wx:for-item="item" wx:key="key">
+    <navigator class="weui-cell weui-cell_access" hover-class="weui-cell_active" data-id="{{item._id}}" bindtap="listJump">
+      <view class="weui-cell__hd">
+        <image src="{{item.imgs}}" class="headImg"></image>
+      </view>
+      <text>{{item.name}} C7宿舍 10分钟送到</text>
+    </navigator>
+  </view>
+</view>

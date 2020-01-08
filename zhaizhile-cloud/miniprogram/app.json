@@ -1,11 +1,11 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/page1/page1",
-    "pages/page2/page2",
-    "pages/page3/page3",
-    "pages/page4/page4",
-    "pages/page5/page5"
+    "pages/publishOrder/page1",
+    "pages/taskOrder/page2",
+    "pages/orderList/page3",
+    "pages/sendOrder/page4",
+    "pages/orderMobile/page5"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -25,13 +25,13 @@
         "text": "主页"
       },
       {
-        "pagePath": "pages/page1/page1",
+        "pagePath": "pages/publishOrder/page1",
         "iconPath": "image/edit_un.png",
         "selectedIconPath": "image/edit_in.png",
         "text": "发布订单"
       },
       {
-        "pagePath": "pages/page3/page3",
+        "pagePath": "pages/orderList/page3",
         "iconPath": "image/index_un.png",
         "selectedIconPath": "image/index_in.png",
         "text": "订单大厅"
