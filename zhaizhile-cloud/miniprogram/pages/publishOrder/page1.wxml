@@ -62,7 +62,7 @@
           </view>
           <view class="weui-uploader__bd">
             <view class="weui-uploader__files" id="uploaderFiles">
-              <block wx:for="{{files}}" wx:key="*this">
+              <block wx:for="{{files}}" wx:for-item="item" wx:key="*this">
                 <view class="weui-uploader__file" bindtap="previewImage" id="{{index}}">
                   <image class="weui-uploader__img" src="{{item}}" mode="aspectFill"   />
                 </view>

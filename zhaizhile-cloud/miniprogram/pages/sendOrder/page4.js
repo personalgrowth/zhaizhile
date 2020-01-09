@@ -5,28 +5,67 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    details: {}
   },
-
-  gotopage5: function () {
-    wx.showModal({
-      title: '联系客户',
-      content: '135********',
-      success: function (res) {
-        wx.navigateTo({ url: '../page5/page5' });
-      }
-    });
-  },
-
-
-
-
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let that = this;
 
+    const db = wx.cloud.database();
+    db.collection('order').where({
+      _id: options.id
+    }).get({
+      success: function (res) {
+        let data = res.data[0];
+        data.imgs = data.imgs.split("|");
+        that.setData({
+          details: data
+        })
+      }
+    })
+  },
+
+  closeOrder: function (e) {
+    let that = this;
+    wx.showModal({
+      title: '提示',
+      content: '确定取消订单吗？',
+      success(res) {
+        if (res.confirm) {
+          let data = e.currentTarget.dataset;
+          const db = wx.cloud.database();
+          //删除订单
+          db.collection("order").where({
+            _id: data.id
+          }).remove({
+            success: res => {
+              wx.navigateBack({
+                delta: 2
+              })
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    });
+  },
+
+  makeCall: function () {
+    let tel = this.data.details.tel;
+    console.log(tel);
+    wx.showModal({
+      title: '联系客户',
+      content: '确定联系客户' + tel + '吗？',
+      success(res) {
+        if (res.confirm) {
+          wx.navigateTo({ url: '../orderMobile/page5' });
+        }
+      }
+    });
   },
 
   /**
@@ -40,41 +79,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
 
   }
 })

@@ -17,6 +17,7 @@ Page({
       date: e.detail.value
     })
   },
+  //已有图片进行替换
   previewImage: function (e) {
     let oldindex = e.currentTarget.id;
     let that = this;
@@ -32,6 +33,7 @@ Page({
       }
     })
   },
+  //新增图片
   chooseImage: function () {
     let that = this;
     wx.chooseImage({
@@ -71,7 +73,9 @@ Page({
         filesid = resCloud.map((item) => {
           return item.fileID
         })
-        const db = wx.cloud.database()
+
+        let myDate = new Date();
+        const db = wx.cloud.database();
         db.collection('order').add({
           data: {
             name: e.detail.value.name,
@@ -79,8 +83,10 @@ Page({
             money: e.detail.value.money,
             content: e.detail.value.content,
             cantime: that.data.date,
+            insettime: myDate.getFullYear() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getDate() + ' ' + myDate.getHours() + ':' + myDate.getMinutes(),
             address: e.detail.value.address,
-            imgs: filesid.join(",")
+            imgs: filesid.join('|'),
+            orderStatus: '1'
           },
           success: res => {
             // 在返回结果中会包含新创建的记录的 _id
@@ -88,31 +94,27 @@ Page({
               counterId: res._id,
               count: 1
             })
-            wx.showToast({
-              title: '新增记录成功',
-            })
-            console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
+
+            wx.showModal({
+              title: '成功',
+              content: '订单发布成功,请等待接单',
+              showCancel: false,
+              success: function (res) {
+                //订单发布成功
+                wx.navigateTo({ url: '../taskOrder/page2' });
+              }
+            });
           },
           fail: err => {
             wx.showToast({
               icon: 'none',
-              title: '新增记录失败'
+              title: '订单发布失败，请重新发布'
             })
-            console.error('[数据库] [新增记录] 失败：', err)
           }
         })
       }).catch((err) => {
         console.log(err)
-      })
-    wx.showModal({
-      title: '成功',
-      content: '订单发布成功,请等待接单',
-      showCancel: false,
-      success: function (res) {
-        //订单发布成功
-        wx.navigateTo({ url: '../page2/page2' });
-      }
-    });
+    })
   },
 
   /**

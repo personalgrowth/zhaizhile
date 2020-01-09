@@ -13,31 +13,47 @@ Page({
    */
   onLoad: function (options) {
     let _that = this;
-    wx.showNavigationBarLoading();
     wx.startPullDownRefresh();
-    this.loadData({
-      type: 'down'
-    });
   },
 
   loadData: function (options) {
     let _that = this;
     const db = wx.cloud.database()
-    db.collection('order').get({
-      success: function (res) {
-        if(options.type == 'down'){
-          _that.setData({
-            list: res.data
-          })
-          wx.hideNavigationBarLoading();
-          wx.stopPullDownRefresh();
+    new Promise((resolve, reject) => {
+      db.collection('order').get({
+        success: res => {
+          if (options.type == 'down') {
+            let data = res.data;
+            let newData = [];
+            for (let i = 0; i < data.length; i++) {
+              data[i].imgs = data[i].imgs.split('|');
+              newData.push(data[i]);
+            }
+            resolve(newData);
+          }
+        },
+        fail: err => {
+          reject('查询列表数据失败');
         }
-      }
+      })
+    }).then(res => {
+      _that.setData({
+        list: res
+      })
+      wx.hideNavigationBarLoading();
+      wx.stopPullDownRefresh();
+    }).catch(err => {
+      wx.showToast(err);
+      wx.hideNavigationBarLoading();
+      wx.stopPullDownRefresh();
     })
   },
 
-  listJump: function (e) {
-    
+  jumpOrderDetails: function (e) {
+    let data = e.currentTarget.dataset;
+    wx.navigateTo({
+      url: '/pages/sendOrder/page4?id=' + data.id
+    });
   },
 
   /**
@@ -55,20 +71,6 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
@@ -82,13 +84,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
 
   }
 })
