@@ -1,36 +1,35 @@
 <!--pages/page4/page4.wxml-->
 <view class="page">
+	<view class="weui-panel weui-panel_access" style="margin-top:0rpx">
+		<view class="weui-panel__bd">
+			<view class="weui-media-box weui-media-box_appmsg">
 
-    <view class="weui-panel weui-panel_access" style="margin-top:0rpx">
-        <view class="weui-panel__bd">
-            <view class="weui-media-box weui-media-box_appmsg">
-
-                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                    <view class="weui-media-box__title">
-                    <text>送达倒计时</text>
-                          <image src="../../image/clock.png" style="text-align:center;margin-left: 170px;                 vertical-align: middle;width:20px; height: 30px;"></image>
-                    </view>
-                    <view class="weui-media-box__desc">05:45</view>
-                </view>
-            </view>
-        </view>
-        <view class="weui-btn-area">
-                <button class="weui-btn" type="primary" bindtap='gotopage1'>已接单</button>
-        </view>
-    </view>
+				<view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+					<view class="weui-media-box__title">
+						<text>送达倒计时</text>
+						<image src="../../image/clock.png" style="text-align:center;margin-left: 170px;                 vertical-align: middle;width:20px; height: 30px;"></image>
+					</view>
+					<view class="weui-media-box__desc">05:45</view>
+				</view>
+			</view>
+		</view>
+		<view class="weui-btn-area">
+			<button class="weui-btn" type="primary" bindtap='gotopage1'>已接单</button>
+		</view>
+	</view>
 
 
-<!-- 描述及图片 -->
+	<!-- 描述及图片 -->
 
-  <view class="weui-cells" style="margin-top:20rpx">
-    <view class="weui-cell">
-      <view class="weui-cell__bd">
-        <view class="weui-uploader">
-          <view class="weui-cells__title"></view>
-          <view class="weui-uploader__hd">
-            <view class="section">
-              <textarea auto-height placeholder="外卖详情" style="min-height: 150rpx;"  />
-              <text>重庆鸡公煲，里面装了两份。</text>
+	<view class="weui-cells" style="margin-top:20rpx">
+		<view class="weui-cell">
+			<view class="weui-cell__bd">
+				<view class="weui-uploader">
+					<view class="weui-cells__title"></view>
+					<view class="weui-uploader__hd">
+						<view class="section">
+							<textarea auto-height placeholder="外卖详情" style="min-height: 150rpx;" />
+							<text>重庆鸡公煲，里面装了两份。</text>
             </view>
           </view>
 

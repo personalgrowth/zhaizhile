@@ -1,5 +1,4 @@
 <!--index.wxml-->
-
 <view class="page" style="background-color:white;height:100%;">
   <button class="place-order" bindtap="placeOrder">下单</button>
   <button class="take-order">接单</button>

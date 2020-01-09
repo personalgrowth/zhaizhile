@@ -8,8 +8,14 @@ Page({
    */
   data: {
     files: [],
+    date: '',
 
     isAgree: false
+  },
+  binddatechange: function (e) {
+    this.setData({
+      date: e.detail.value
+    })
   },
   previewImage: function (e) {
     let oldindex = e.currentTarget.id;
@@ -72,7 +78,7 @@ Page({
             tel: e.detail.value.tel,
             money: e.detail.value.money,
             content: e.detail.value.content,
-            cantime: that.data.data,
+            cantime: that.data.date,
             address: e.detail.value.address,
             imgs: filesid.join(",")
           },
