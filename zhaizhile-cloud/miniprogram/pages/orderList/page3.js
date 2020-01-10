@@ -51,9 +51,17 @@ Page({
 
   jumpOrderDetails: function (e) {
     let data = e.currentTarget.dataset;
-    wx.navigateTo({
-      url: '/pages/sendOrder/page4?id=' + data.id
-    });
+    if (data.status == '1'){
+      //跳到发布结果页中
+      wx.navigateTo({
+        url: '../taskOrder/page2?id=' + data.id
+      });
+    } else {
+      //跳到接单结果页中
+      wx.navigateTo({
+        url: '../sendOrder/page4?id=' + data.id
+      });
+    }
   },
 
   /**
@@ -67,7 +75,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    wx.startPullDownRefresh();
   },
 
   /**

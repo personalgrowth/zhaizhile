@@ -16,7 +16,7 @@
 			</view>
 		</view>
 		<view class="weui-btn-area">
-			<button class="weui-btn" type="primary" bindtap='gotopage1'>修改订单</button>
+			<button class="weui-btn" type="primary" bindtap='updateOrder'>修改订单</button>
 		</view>
 	</view>
 
@@ -29,19 +29,19 @@
 		<view class="weui-form-preview__bd">
 			<view class="weui-form-preview__item">
 				<view class="weui-form-preview__label">订单金额</view>
-				<view class="weui-form-preview__value">3元</view>
+				<view class="weui-form-preview__value">{{details.money}}元</view>
 			</view>
 			<view class="weui-form-preview__item">
 				<view class="weui-form-preview__label">发布时间</view>
-				<view class="weui-form-preview__value">2019-12-28 13:42:55</view>
+				<view class="weui-form-preview__value">{{details.insettime}}</view>
 			</view>
 			<view class="weui-form-preview__item">
 				<view class="weui-form-preview__label">送达地址</view>
-				<view class="weui-form-preview__value">C7宿舍</view>
+				<view class="weui-form-preview__value">{{details.address}}</view>
 			</view>
 			<view class="weui-form-preview__item">
 				<view class="weui-form-preview__label">目标时间</view>
-				<view class="weui-form-preview__value">2019-12-28 13:52:55</view>
+				<view class="weui-form-preview__value">{{details.cantime}}</view>
 			</view>
 		</view>
 		<view class="weui-form-preview__ft">
@@ -70,7 +70,7 @@
 		</view>
 		<view class="weui-form-preview__ft">
 			<view class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active">拒绝</view>
-			<navigator class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">同意</navigator>
+			<navigator class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap="agreeOrder" data-id="{{details._id}}">同意</navigator>
 		</view>
 	</view>
 

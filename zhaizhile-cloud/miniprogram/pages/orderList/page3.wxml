@@ -1,7 +1,7 @@
 <!--pages/page3/page3.wxml-->
 <view class="page">
   <view class="weui-cells weui-cells_after-title" wx:for="{{list}}" wx:for-item="item" wx:key="key">
-    <navigator class="weui-cell weui-cell_access" hover-class="weui-cell_active" data-id="{{item._id}}" bindtap="jumpOrderDetails">
+    <navigator class="weui-cell weui-cell_access" hover-class="weui-cell_active" data-id="{{item._id}}" data-status="{{item.orderStatus}}" bindtap="jumpOrderDetails">
       <view class="weui-cell__hd">
         <image src="{{item.imgs[0]}}" class="headImg" style="background-color:#eeeeee"></image>
       </view>

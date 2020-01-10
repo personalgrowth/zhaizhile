@@ -1,7 +1,7 @@
 <!--pages/page4/page4.wxml-->
 <view class="page">
   <view class="weui-panel weui-panel_access" style="margin-top:0rpx">
-    <view class="weui-panel__bd">
+    <view class="weui-panel__bd" wx:if="{{details.orderStatus == '2'}}">
       <view class="weui-media-box weui-media-box_appmsg">
         <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
           <view class="weui-media-box__title">
@@ -13,8 +13,8 @@
       </view>
     </view>
     <view class="weui-btn-area">
-      <button class="weui-btn" type="primary" wx:if="{{details.orderStatus == '1'}}">接单中</button>
-      <button class="weui-btn" type="primary" wx:elif="{{details.orderStatus == '2'}}">已接单</button>
+      <button class="weui-btn" type="primary" wx:if="{{details.orderStatus == '2'}}">接单中</button>
+      <button class="weui-btn" type="primary" wx:elif="{{details.orderStatus == '3'}}">订单已完成</button>
     </view>
   </view>
 
@@ -41,8 +41,8 @@
   <view class="weui-form-preview" style="margin-top:20rpx">
     <view class="weui-form-preview__hd">
       <view class="weui-form-preview__label">交易状态</view>
-      <view class="weui-form-preview__value_in-hd" wx:if="{{details.orderStatus == '1'}}">接单中</view>
-      <view class="weui-form-preview__value_in-hd" wx:elif="{{details.orderStatus == '2'}}">已接单</view>
+      <view class="weui-form-preview__value_in-hd" wx:if="{{details.orderStatus == '2'}}">接单中</view>
+      <view class="weui-form-preview__value_in-hd" wx:elif="{{details.orderStatus == '3'}}">订单已完成</view>
     </view>
     <view class="weui-form-preview__bd">
       <view class="weui-form-preview__item">
@@ -62,11 +62,31 @@
         <view class="weui-form-preview__value">{{details.cantime}}</view>
       </view>
     </view>
-    <view class="weui-form-preview__ft">
-      <view wx:if="{{details.orderStatus == '1'}}" class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active" data-id="{{details._id}}" bindtap="closeOrder">取消接单</view>
-      <navigator class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap='makeCall'>
+    <view class="weui-form-preview__ft" wx:if="{{details.orderStatus == '2'}}">
+      <view class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active" data-id="{{details._id}}" bindtap="closeOrder">取消接单</view>
+      <navigator class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" data-id="{{details._id}}" bindtap='makeCall'>
         电话联系
       </navigator>
+    </view>
+  </view>
+
+  <!-- 接单人信息 -->
+  <view class="weui-form-preview" style="margin-top:20rpx">
+    <view class="weui-form-preview" style="margin-top:20rpx" wx:if="{{details.orderStatus == '3'}}">
+      <view class="weui-form-preview__hd">
+        <view class="weui-form-preview__label">消息</view>
+        <view class="weui-form-preview__value_in-hd">接单人信息</view>
+      </view>
+      <view class="weui-form-preview__bd">
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">申请人</view>
+          <view class="weui-form-preview__value">卡卡罗特</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">完成率</view>
+          <view class="weui-form-preview__value">97%</view>
+        </view>
+      </view>
     </view>
   </view>
 </view>

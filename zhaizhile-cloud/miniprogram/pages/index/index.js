@@ -52,9 +52,13 @@ Page({
     wx.switchTab({
       url: '../publishOrder/page1'
     })
+  },
+
+  goOrderList: function() {
+    wx.switchTab({
+      url: '../orderList/page3'
+    })
   }
-
-
 
 
 })

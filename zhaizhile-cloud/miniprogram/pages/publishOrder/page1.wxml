@@ -6,7 +6,7 @@
 				<view class="weui-cell__hd">
 					<image src="../../image/edit_in.png" style="text-align:center;margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
 				</view>
-				<view class="weui-cell__bd">查看已发布订单</view>
+				<view class="weui-cell__bd">发布订单</view>
 			</navigator>
 		</view>
 

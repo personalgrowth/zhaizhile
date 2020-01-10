@@ -88,10 +88,10 @@ Page({
             imgs: filesid.join('|'),
             orderStatus: '1'
           },
-          success: res => {
+          success: response => {
             // 在返回结果中会包含新创建的记录的 _id
             this.setData({
-              counterId: res._id,
+              counterId: response._id,
               count: 1
             })
 
@@ -101,7 +101,9 @@ Page({
               showCancel: false,
               success: function (res) {
                 //订单发布成功
-                wx.navigateTo({ url: '../taskOrder/page2' });
+                wx.navigateTo({ 
+                  url: '../taskOrder/page2?id=' + response._id 
+                });
               }
             });
           },

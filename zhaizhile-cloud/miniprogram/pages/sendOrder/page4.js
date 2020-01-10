@@ -13,7 +13,6 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
-
     const db = wx.cloud.database();
     db.collection('order').where({
       _id: options.id
@@ -54,15 +53,17 @@ Page({
     });
   },
 
-  makeCall: function () {
+  makeCall: function (e) {
     let tel = this.data.details.tel;
-    console.log(tel);
+    let data = e.currentTarget.dataset;
     wx.showModal({
       title: '联系客户',
       content: '确定联系客户' + tel + '吗？',
       success(res) {
         if (res.confirm) {
-          wx.navigateTo({ url: '../orderMobile/page5' });
+          wx.navigateTo({ 
+            url: '../orderMobile/page5?id=' + data.id  
+          });
         }
       }
     });
