@@ -15,6 +15,6 @@ App({
     }
   },
   globalData: {
-    orderTime: '00:10'     //下订单倒计时时间
+    orderTime: '00:10:00'     //下订单倒计时时间
   }
 })
