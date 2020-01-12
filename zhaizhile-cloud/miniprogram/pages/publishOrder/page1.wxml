@@ -41,7 +41,7 @@
 			<view class="weui-cell weui-cell_input">
 				<view class="weui-cell__bd cell-title">有效时间</view>
 				<view class="weui-cell__ft">
-					<picker mode="date" value="{{showDate}}" start="{{showDate}}" bindchange="binddatechange">
+					<picker mode="date" value="{{showDate}}" start="{{startDate}}" end="2025-01-01" bindchange="binddatechange">
 						<view class="weui-input">{{showDate||'到时间自动删除'}}</view>
 					</picker>
 				</view>

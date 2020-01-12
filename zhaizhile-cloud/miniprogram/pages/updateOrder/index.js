@@ -11,6 +11,7 @@ Page({
     updateOrder: {},
 
     files: [],
+    startDate: new Date().getFullYear() + '-' + ('0' + (new Date().getMonth() + 1)) + '-' + new Date().getDate(),
     showDate: '',
     date: ''
   },

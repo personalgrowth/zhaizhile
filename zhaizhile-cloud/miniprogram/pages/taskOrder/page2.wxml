@@ -11,7 +11,7 @@
 						<text>接单倒计时</text>
 						<image src="../../image/clock.png" style="text-align:center;margin-left: 170px;                 vertical-align: middle;width:20px; height: 30px;"></image>
 					</view>
-					<view class="weui-media-box__desc">07:45</view>
+					<view class="weui-media-box__desc">{{timeCountDown}}</view>
 				</view>
 			</view>
 		</view>

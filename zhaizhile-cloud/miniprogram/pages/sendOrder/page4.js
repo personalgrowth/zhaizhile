@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    details: {}
+    details: {},
+    timeCountDown: ''
   },
 
   /**
@@ -22,6 +23,10 @@ Page({
       success: function (res) {
         let data = res.data[0];
         data.imgs = data.imgs.split("|");
+        let day = data.cantime - globalApp.nowDaysTimeStamp() == 0 ? '1' : data.cantime - globalApp.nowDaysTimeStamp();
+        that.setData({
+          timeCountDown: '还剩余' + (data.cantime - globalApp.nowDaysTimeStamp() + 1) + '天'
+        })
         data.cantime = globalApp.timeStampTurnDate(data.cantime);
         that.setData({
           details: data
