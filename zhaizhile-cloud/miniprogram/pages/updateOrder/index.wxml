@@ -1,0 +1,99 @@
+<!--pages/page1/page1.wxml-->
+<form bindsubmit="updateOrder">
+  <view class="page">
+    <view class="weui-cells weui-cells_after-title">
+      <navigator class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell__hd">
+          <image src="../../image/edit_in.png" style="text-align:center;margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+        </view>
+        <view class="weui-cell__bd">修改订单</view>
+      </navigator>
+    </view>
+
+    <!-- 外卖信息 -->
+    <view class="weui-cells__title">外卖信息</view>
+    <view class="weui-cells weui-cells_after-title">
+
+      <navigator class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+
+        <view class="weui-cell__bd">姓名</view>
+        <view class="weui-cell__ft">
+          <input class="weui-input" type="text" name="name" placeholder="请输入" value="{{updateOrder.name}}"/>
+        </view>
+      </navigator>
+
+      <navigator class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+
+        <view class="weui-cell__bd">手机号</view>
+        <view class="weui-cell__ft">
+          <input class="weui-input" type="number" name="tel" placeholder="请输入" value="{{updateOrder.tel}}"/>
+        </view>
+      </navigator>
+
+      <navigator class="weui-cell" hover-class="weui-cell_active">
+
+        <view class="weui-cell__bd">宿舍地址</view>
+        <view class="weui-cell__ft">
+          <input class="weui-input" type="text" name="address" placeholder="请输入" value="{{updateOrder.address}}"/>
+        </view>
+      </navigator>
+
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd cell-title">有效时间</view>
+        <view class="weui-cell__ft">
+          <picker mode="date" value="{{showDate}}" start="{{showDate}}" bindchange="binddatechange">
+            <view class="weui-input">{{showDate || updateOrder.cantime || '到时间自动删除'}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells__tips">超过时间自动删除此发布</view>
+
+    <!-- 描述及图片 -->
+    <view class="weui-cells__title"></view>
+    <view class="weui-cells">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <view class="weui-uploader">
+            <view class="weui-uploader__hd">
+              <view class="section">
+                <textarea bindblur="getInfoText" auto-height placeholder="请输入您的外卖详情" name="content" style="min-height: 150rpx;" value="{{updateOrder.content}}"/>
+              </view>
+            </view>
+            <view class="weui-uploader__bd">
+              <view class="weui-uploader__files" id="uploaderFiles">
+                <block wx:for="{{files}}" wx:for-item="item" wx:key="*this">
+                  <view class="weui-uploader__file" bindtap="previewImage" id="{{index}}">
+                    <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                  </view>
+                </block>
+              </view>
+              <view class="weui-uploader__input-box">
+                <view class="weui-uploader__input" bindtap="chooseImage"></view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 结算 -->
+    <view class="weui-cells__title">结算</view>
+    <view class="weui-cells weui-cells_after-title">
+      <!-- 定价 -->
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">订单价格</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="digit" placeholder="您愿支付多少钱" name="money" value="{{updateOrder.money}}"/>
+        </view>
+        <view class="weui-cell__ft">¥</view>
+      </view>
+    </view>
+    <view class="weui-cells__tips">必须大于1.0元</view>
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" formType="submit">确认修改</button>
+    </view>
+  </view>
+</form>

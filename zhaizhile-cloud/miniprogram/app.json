@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/publishOrder/page1",
+    "pages/updateOrder/index",
     "pages/taskOrder/page2",
     "pages/orderList/page3",
     "pages/sendOrder/page4",

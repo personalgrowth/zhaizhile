@@ -1,10 +1,13 @@
 // pages/page2/page2.js
+var globalApp = getApp();
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    id: '',
     details: ''
   },
   
@@ -13,13 +16,24 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
+    that.setData({
+      id: options.id
+    })
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    let that = this;
     const db = wx.cloud.database();
     db.collection('order').where({
-      _id: options.id
+      _id: that.data.id
     }).get({
       success: function (res) {
         let data = res.data[0];
         data.imgs = data.imgs.split("|");
+        data.cantime = globalApp.timeStampTurnDate(data.cantime);
         that.setData({
           details: data
         })
@@ -28,12 +42,17 @@ Page({
   },
 
   updateOrder: function () {
+    let that = this
+
     wx.showModal({
+      title: '提示',
       content: '确认修改吗',
       success: function (res) {
-        wx.navigateBack({
-          delta: 1
-        })
+        if (res.confirm) {
+          wx.redirectTo({
+            url: '../updateOrder/index?id=' + that.data.id
+          })
+        }
       }
     });
   },
@@ -70,13 +89,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
 
   }
 })

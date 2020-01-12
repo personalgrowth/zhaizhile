@@ -1,4 +1,6 @@
 // pages/page4/page4.js
+var globalApp = getApp();
+
 Page({
 
   /**
@@ -20,6 +22,7 @@ Page({
       success: function (res) {
         let data = res.data[0];
         data.imgs = data.imgs.split("|");
+        data.cantime = globalApp.timeStampTurnDate(data.cantime);
         that.setData({
           details: data
         })

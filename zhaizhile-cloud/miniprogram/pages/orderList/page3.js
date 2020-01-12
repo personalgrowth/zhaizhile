@@ -1,4 +1,6 @@
 // pages/page3/page3.js
+var globalApp = getApp();
+
 Page({
 
   /**
@@ -12,27 +14,32 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let _that = this;
-    wx.startPullDownRefresh();
+    
   },
 
   loadData: function (options) {
     let _that = this;
-    const db = wx.cloud.database()
+    let dayTime = globalApp.nowDaysTimeStamp();
+    const db = wx.cloud.database();
     new Promise((resolve, reject) => {
+      //查询有效期内的订单
       db.collection('order').get({
-        success: res => {
+        success: function (res) {
           if (options.type == 'down') {
             let data = res.data;
             let newData = [];
             for (let i = 0; i < data.length; i++) {
-              data[i].imgs = data[i].imgs.split('|');
-              newData.push(data[i]);
+              if (data[i].cantime >= dayTime){
+                data[i].cantime = globalApp.timeStampTurnDate(data[i].cantime);
+                data[i].imgs = data[i].imgs.split('|');
+                newData.push(data[i]);
+              }
             }
             resolve(newData);
           }
         },
         fail: err => {
+          console.log(err);
           reject('查询列表数据失败');
         }
       })
@@ -43,7 +50,10 @@ Page({
       wx.hideNavigationBarLoading();
       wx.stopPullDownRefresh();
     }).catch(err => {
-      wx.showToast(err);
+      wx.showToast({
+        icon: 'none',
+        title: '查询数据失败，请稍后'
+      })
       wx.hideNavigationBarLoading();
       wx.stopPullDownRefresh();
     })
